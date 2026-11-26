@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Il Pollaio</title>
+    <meta
+      name="description"
+      content="Il Pollaio: la classifica scherzosa della classe. Polli, tacchini, salami, pagliacci e patatini."
+    />
+    <meta name="theme-color" content="#fff8ec" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%94%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/home.css" />
+    <script type="module" src="js/home.js"></script>
+  </head>
+  <body>
+    <header class="intestazione pagina">
+      <a class="logo" href="./">🐔 Il Pollaio</a>
+      <span class="spazio"></span>
+      <span id="badge-modo" class="etichetta nascosto"></span>
+    </header>
+
+    <main class="pagina">
+      <section id="vista-setup" class="nascosto" aria-labelledby="titolo-setup">
+        <div class="eroe">
+          <p class="emoji-eroe" aria-hidden="true">🐔 🦃 🥓 🤡 🥔</p>
+          <h1 id="titolo-setup">Benvenuto nel Pollaio</h1>
+          <p class="tenue">
+            Chi ci casca è un pollo, chi esagera prende il naso rosso, chi è bravo è un patatino.
+          </p>
+        </div>
+
+        <div class="due-colonne">
+          <form id="form-setup" class="carta" novalidate>
+            <h2>Collega il tuo foglio</h2>
+            <label for="url">URL della web app</label>
+            <input
+              id="url"
+              name="url"
+              type="url"
+              required
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="https://script.google.com/macros/s/.../exec"
+            />
+            <label for="pin">PIN</label>
+            <input id="pin" name="pin" type="password" required autocomplete="current-password" />
+            <p class="tenue piccolo">
+              URL e PIN restano solo in questo browser. Istruzioni per creare il foglio nel
+              <a href="https://github.com/federicodiluca/pollaio/blob/main/apps-script/README.md"
+                >README del backend</a
+              >.
+            </p>
+            <p id="errore-setup" class="errore" role="alert"></p>
+            <div class="riga-btn">
+              <button class="btn primario" type="submit">Collega</button>
+            </div>
+          </form>
+
+          <div class="carta">
+            <h2>Solo un'occhiata?</h2>
+            <p>
+              Prova la <strong>modalità demo</strong>: dati inventati salvati nel browser, nessun
+              backend. Puoi assegnare tacchini a volontà.
+            </p>
+            <div class="riga-btn">
+              <button id="btn-demo" class="btn" type="button">🥔 Prova la demo</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="vista-classi" class="nascosto" aria-labelledby="titolo-classi">
+        <h1 id="titolo-classi">Scegli la classe</h1>
+        <p id="stato-classi" class="tenue" role="status">Carico le classi...</p>
+        <ul id="lista-classi" class="lista-classi"></ul>
+
+        <details class="carta gestione">
+          <summary>Aggiungi una classe</summary>
+          <form id="form-classe">
+            <label for="classe-id">Sigla</label>
+            <input
+              type="text"
+              id="classe-id"
+              name="id"
+              required
+              maxlength="20"
+              placeholder="es. 2M"
+            />
+            <label for="classe-nome">Nome (facoltativo)</label>
+            <input
+              type="text"
+              id="classe-nome"
+              name="nome"
+              maxlength="60"
+              placeholder="es. 2M Informatica"
+            />
+            <div class="riga-btn">
+              <button class="btn" type="submit">Aggiungi</button>
+            </div>
+          </form>
+        </details>
+
+        <div class="riga-btn">
+          <button id="btn-backup" class="btn" type="button">💾 Esporta backup JSON</button>
+          <button id="btn-ripristina-demo" class="btn nascosto" type="button">
+            ♻️ Ripristina dati demo
+          </button>
+          <button id="btn-esci" class="btn pericolo" type="button">Cambia collegamento</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="pagina tenue piccolo">
+      <p>
+        Fatto con 🥔 da un prof che si spiega peggio.
+        <a href="https://github.com/federicodiluca/pollaio">Codice sorgente</a>
+      </p>
+    </footer>
+  </body>
+</html>

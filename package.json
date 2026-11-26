@@ -13,7 +13,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check:dash": "node scripts/check-dash.mjs",
-    "test": "node --test test/",
+    "test": "node --test \"test/**/*.test.js\"",
     "serve": "npx --yes http-server -c-1 -p 8080 ."
   },
   "devDependencies": {

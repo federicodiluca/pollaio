@@ -1,0 +1,379 @@
+/* Il Pollaio: stile di base condiviso */
+
+:root {
+  --sfondo: #fff8ec;
+  --carta: #ffffff;
+  --inchiostro: #2b2118;
+  --tenue: #6d5d4f;
+  --bordo: #ead9c2;
+  --tacchino: #c8553d;
+  --tacchino-chiaro: #fbe3dc;
+  --patatino: #2f7d5b;
+  --patatino-chiaro: #dcf1e5;
+  --naso: #d62839;
+  --oro: #e0a100;
+  --fuoco: #1d4ed8;
+  --raggio: 16px;
+  --ombra: 0 2px 0 rgb(43 33 24 / 8%), 0 8px 24px rgb(43 33 24 / 8%);
+  --font: ui-rounded, 'SF Pro Rounded', 'Nunito', 'Segoe UI', system-ui, sans-serif;
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.45;
+  color: var(--inchiostro);
+  background: var(--sfondo);
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+}
+
+a {
+  color: var(--fuoco);
+}
+
+:focus-visible {
+  outline: 3px solid var(--fuoco);
+  outline-offset: 2px;
+}
+
+.nascosto {
+  display: none !important;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Contenitori ---------- */
+
+.pagina {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.carta {
+  background: var(--carta);
+  border: 1px solid var(--bordo);
+  border-radius: var(--raggio);
+  box-shadow: var(--ombra);
+  padding: 1.25rem;
+}
+
+.intestazione {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0.75rem 1rem;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-decoration: none;
+  color: inherit;
+  letter-spacing: -0.02em;
+}
+
+.spazio {
+  flex: 1;
+}
+
+.tenue {
+  color: var(--tenue);
+}
+
+.etichetta {
+  display: inline-block;
+  padding: 0.15em 0.6em;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: var(--bordo);
+}
+
+.etichetta.demo {
+  background: #ffe58a;
+}
+
+.etichetta.offline {
+  background: var(--tacchino-chiaro);
+  color: var(--tacchino);
+}
+
+/* ---------- Form e pulsanti ---------- */
+
+label {
+  display: block;
+  font-weight: 700;
+  margin: 0.75rem 0 0.25rem;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  border: 2px solid var(--bordo);
+  border-radius: 12px;
+  background: #fff;
+  color: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--fuoco);
+  outline: none;
+}
+
+.btn {
+  font: inherit;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  min-height: 44px;
+  padding: 0.6rem 1.1rem;
+  border: 2px solid var(--inchiostro);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--inchiostro);
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    transform 0.08s,
+    box-shadow 0.08s;
+  box-shadow: 0 3px 0 var(--inchiostro);
+}
+
+.btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 0 0 var(--inchiostro);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn.primario {
+  background: var(--inchiostro);
+  color: #fff;
+}
+
+.btn.piccolo {
+  min-height: 36px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.9rem;
+}
+
+.btn.pericolo {
+  border-color: var(--naso);
+  color: var(--naso);
+  box-shadow: 0 3px 0 var(--naso);
+}
+
+.riga-btn {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.errore {
+  color: var(--naso);
+  font-weight: 700;
+}
+
+/* ---------- Toast ---------- */
+
+.toasts {
+  position: fixed;
+  left: 50%;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 50;
+  width: min(94vw, 480px);
+}
+
+.toast {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem 1rem;
+  border-radius: 14px;
+  background: var(--inchiostro);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: var(--ombra);
+  animation: toast-entra 0.2s ease-out;
+}
+
+.toast span:first-child {
+  flex: 1;
+}
+
+.toast.errore {
+  background: var(--naso);
+  color: #fff;
+}
+
+.toast.via {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: 0.25s;
+}
+
+.toast-azione {
+  font: inherit;
+  font-weight: 800;
+  color: #ffd166;
+  background: none;
+  border: 2px solid #ffd166;
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  min-height: 40px;
+  cursor: pointer;
+}
+
+.toast-barra {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  width: 100%;
+  background: #ffd166;
+  transform-origin: left;
+  animation: toast-barra linear forwards;
+}
+
+@keyframes toast-entra {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@keyframes toast-barra {
+  to {
+    transform: scaleX(0);
+  }
+}
+
+/* ---------- Boia dei matti! ---------- */
+
+.boia {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: rgb(214 40 57 / 88%);
+  color: #fff;
+  cursor: pointer;
+  animation: boia-sfondo 2.8s ease-out forwards;
+}
+
+.boia-testo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  animation: boia-botta 0.6s cubic-bezier(0.2, 2.2, 0.4, 1) both;
+}
+
+.boia-testo strong {
+  font-size: clamp(3rem, 12vw, 10rem);
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 0 6px 0 rgb(0 0 0 / 25%);
+  transform: rotate(-4deg);
+}
+
+.boia-testo span {
+  font-size: clamp(1.2rem, 4vw, 3rem);
+  font-weight: 700;
+}
+
+.boia-goccia {
+  position: absolute;
+  top: -15vh;
+  animation: boia-cade 2s ease-in forwards;
+}
+
+@keyframes boia-sfondo {
+  0%,
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes boia-botta {
+  0% {
+    transform: scale(0.2) rotate(-20deg);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+
+@keyframes boia-cade {
+  to {
+    transform: translateY(130vh) rotate(540deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .boia {
+    animation-duration: 2.8s !important;
+  }
+}

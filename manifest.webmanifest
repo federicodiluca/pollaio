@@ -1,0 +1,10 @@
+{
+  "name": "Il Pollaio",
+  "short_name": "Pollaio",
+  "lang": "it",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fff8ec",
+  "theme_color": "#fff8ec",
+  "icons": [{ "src": "assets/icona.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
