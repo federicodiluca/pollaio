@@ -1,0 +1,26 @@
+{
+  "name": "pollaio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Il Pollaio: classifica scherzosa per classe",
+  "license": "MIT",
+  "author": "Federico Di Luca",
+  "type": "module",
+  "scripts": {
+    "lint": "npm run lint:html && npm run lint:js && npm run format:check && npm run check:dash",
+    "lint:html": "html-validate \"*.html\"",
+    "lint:js": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check:dash": "node scripts/check-dash.mjs",
+    "test": "node --test test/",
+    "serve": "npx --yes http-server -c-1 -p 8080 ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "eslint": "^9.39.5",
+    "globals": "^17.14.0",
+    "html-validate": "^11.22.1",
+    "prettier": "^3.10.1"
+  }
+}

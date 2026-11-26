@@ -1,0 +1,12 @@
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+# Mai committare dati reali degli studenti
+backup-*.json
+export-*.json
+*.xlsx
+*.csv
+.env
