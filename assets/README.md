@@ -1,5 +1,8 @@
 # Asset
 
+- `icone.svg`: sprite con tutte le icone (categorie e interfaccia).
+- `favicon.svg`: icona del sito.
+
 ## Suono "Boia dei matti!"
 
 Metti qui un file **`boia-dei-matti.mp3`** (breve, 1-3 secondi) e verrà usato al posto del

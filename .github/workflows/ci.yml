@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  controlli:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: html-validate
+        run: npm run lint:html
+      - name: eslint
+        run: npm run lint:js
+      - name: prettier --check
+        run: npm run format:check
+      - name: Niente trattino lungo
+        run: npm run check:dash
+      - name: Test
+        run: npm test
