@@ -302,47 +302,37 @@ textarea:focus {
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: rgb(214 40 57 / 88%);
+  background: #d62839;
   color: #fff;
   cursor: pointer;
-  animation: boia-sfondo 2.8s ease-out forwards;
+  animation: boia-entra 0.25s ease-out;
 }
 
 .boia-testo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 0.5rem;
+  position: relative;
+  z-index: 1;
   padding: 1rem;
+  text-align: center;
   animation: boia-botta 0.6s cubic-bezier(0.2, 2.2, 0.4, 1) both;
 }
 
 .boia-testo strong {
-  font-size: clamp(3rem, 12vw, 10rem);
+  display: block;
+  font-size: clamp(3rem, 13vw, 12rem);
   font-weight: 900;
   line-height: 1;
   text-shadow: 0 6px 0 rgb(0 0 0 / 25%);
   transform: rotate(-4deg);
 }
 
-.boia-testo span {
-  font-size: clamp(1.2rem, 4vw, 3rem);
-  font-weight: 700;
-}
-
 .boia-goccia {
   position: absolute;
-  top: -15vh;
-  animation: boia-cade 2s ease-in forwards;
+  top: -20vh;
+  animation: boia-cade linear infinite;
 }
 
-@keyframes boia-sfondo {
-  0%,
-  80% {
-    opacity: 1;
-  }
-  100% {
+@keyframes boia-entra {
+  from {
     opacity: 0;
   }
 }
@@ -360,7 +350,62 @@ textarea:focus {
 
 @keyframes boia-cade {
   to {
-    transform: translateY(130vh) rotate(540deg);
+    transform: translateY(140vh) rotate(540deg);
+  }
+}
+
+/* ---------- Parata dei caricamenti ---------- */
+
+.parata {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem 0;
+}
+
+.parata-pista {
+  position: relative;
+  width: min(100%, 360px);
+  height: 64px;
+  overflow: hidden;
+  border-bottom: 3px dashed var(--bordo);
+}
+
+.parata-animale {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 48px;
+  animation: parata-cammina 4.4s linear infinite;
+}
+
+.parata-animale .icona-piena {
+  transform-origin: 50% 90%;
+  animation: parata-zampetta 0.4s ease-in-out infinite alternate;
+}
+
+.parata-testo {
+  margin: 0;
+  font-weight: 700;
+  color: var(--tenue);
+}
+
+@keyframes parata-cammina {
+  from {
+    transform: translateX(-60px);
+  }
+  to {
+    transform: translateX(380px);
+  }
+}
+
+@keyframes parata-zampetta {
+  from {
+    transform: rotate(-9deg) translateY(0);
+  }
+  to {
+    transform: rotate(9deg) translateY(-6px);
   }
 }
 
@@ -373,8 +418,14 @@ textarea:focus {
     transition-duration: 0.01ms !important;
   }
 
-  .boia {
-    animation-duration: 2.8s !important;
+  .parata-pista {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .parata-animale {
+    position: static;
   }
 }
 

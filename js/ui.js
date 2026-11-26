@@ -100,3 +100,24 @@ export function scaricaJson(dati, prefisso = 'pollaio-backup') {
 export const parametro = (nome) => new URLSearchParams(location.search).get(nome);
 
 export const riduciMovimento = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/** Parata animata di polli, tacchini, salami e pagliacci che camminano: per i caricamenti. */
+export function caricamento(testo = 'Un attimo...') {
+  const animali = ['pollo', 'tacchino', 'salame', 'pagliaccio'];
+  return el(
+    'div',
+    { class: 'parata', role: 'status' },
+    el(
+      'div',
+      { class: 'parata-pista', 'aria-hidden': 'true' },
+      ...animali.map((id, i) =>
+        el(
+          'span',
+          { class: 'parata-animale', style: `animation-delay:${-i * 1.1}s` },
+          icona(id, { classe: 'icona-piena' }),
+        ),
+      ),
+    ),
+    el('p', { class: 'parata-testo' }, testo),
+  );
+}

@@ -1,8 +1,7 @@
-/** Quello che resta nel browser: collegamento, dati demo, preferenza audio. */
+/** Quello che resta nel browser: collegamento e dati demo. */
 const K = {
   config: 'pollaio.config',
   demo: 'pollaio.demo.db',
-  audio: 'pollaio.audio',
 };
 
 function leggi(k, def = null) {
@@ -26,7 +25,5 @@ export const storage = {
   demo: () => leggi(K.demo),
   salvaDemo: (db) => scrivi(K.demo, db),
   ripristinaDemo: () => localStorage.removeItem(K.demo),
-  audio: () => leggi(K.audio, true),
-  salvaAudio: (v) => scrivi(K.audio, v),
   esci: () => localStorage.removeItem(K.config),
 };

@@ -27,8 +27,8 @@ _Negli screenshot ci sono solo dati demo inventati._
 4. Sulla LIM premi il pulsante dello schermo intero: tutto diventa più grande e la pagina si
    aggiorna da sola ogni 20 secondi.
 
-Quando un ragazzo prende un salame o sale di livello parte **"Boia dei matti!"**, con animazione e
-suono.
+Quando serve, premi il pulsantino **!** in alto (o il tasto **B**): parte **"Boia dei matti!"** a
+tutto schermo. Si chiude toccando lo schermo, con Esc o premendo di nuovo B.
 
 ### Livelli
 
@@ -48,11 +48,6 @@ Uguale per Pollo, Salame e Pagliaccio. Le soglie sono in [`js/categorie.js`](js/
 - **Backup JSON**: scarica tutto il foglio.
 - **Azzera tutto**: scarica prima un backup, poi rimette a zero i contatori della classe
   (nomi e titoli restano). Comodo a fine quadrimestre.
-
-### Il suono
-
-Metti un file `assets/boia-dei-matti.mp3` (anche la tua voce registrata col telefono) e verrà
-usato al posto del "wah wah wah" sintetizzato.
 
 ## Setup del backend
 

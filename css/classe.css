@@ -506,3 +506,14 @@ body.lim .ragazzo-nome {
 body.lim .livello-nome {
   font-size: 1rem;
 }
+
+.btn.tondo.discreto {
+  border-color: transparent;
+  box-shadow: none;
+  background: transparent;
+  color: var(--tenue);
+}
+
+.btn.tondo.discreto:hover {
+  color: var(--naso);
+}

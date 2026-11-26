@@ -1,6 +1,6 @@
 import { storage } from './storage.js';
 import { creaApi, ErroreServer } from './api.js';
-import { $, el, toast, scaricaJson } from './ui.js';
+import { $, el, toast, scaricaJson, caricamento } from './ui.js';
 
 function mostra(id) {
   for (const v of ['vista-setup', 'vista-classi'])
@@ -33,6 +33,8 @@ $('#form-setup').addEventListener('submit', async (e) => {
   const btn = e.submitter;
   btn.disabled = true;
   btn.textContent = 'Controllo...';
+  const attesa = caricamento('Bussiamo al pollaio...');
+  err.replaceChildren(attesa);
   try {
     const config = { modo: 'remoto', url, pin };
     await creaApi(config).listClassi();
@@ -44,6 +46,7 @@ $('#form-setup').addEventListener('submit', async (e) => {
         ? ex.message
         : 'Non riesco a raggiungere la web app. Controlla l’URL e la connessione.';
   } finally {
+    attesa.remove();
     btn.disabled = false;
     btn.textContent = 'Collega';
   }
@@ -59,7 +62,7 @@ $('#btn-demo').addEventListener('click', () => {
 async function caricaClassi(api) {
   const stato = $('#stato-classi');
   const lista = $('#lista-classi');
-  stato.textContent = 'Carico le classi...';
+  stato.replaceChildren(caricamento('Conto le galline...'));
   try {
     const classi = await api.listClassi();
     lista.replaceChildren(

@@ -1,8 +1,8 @@
 import { storage } from './storage.js';
 import { creaApi } from './api.js';
 import { CATEGORIE, PER_ID, livello, podio } from './categorie.js';
-import { $, el, icona, toast, parametro, scaricaJson } from './ui.js';
-import { boia, sbloccaAudio } from './boia.js';
+import { $, el, icona, toast, parametro, scaricaJson, caricamento } from './ui.js';
+import { boia, attivaScorciatoia } from './boia.js';
 
 const config = storage.config();
 const classeId = parametro('classe');
@@ -110,7 +110,9 @@ function disegna() {
   const attivi = stato.studenti
     .filter((s) => s.attivo)
     .sort((a, b) => a.nome.localeCompare(b.nome, 'it'));
-  $('#messaggio').textContent = attivi.length ? '' : 'Classe vuota: aggiungi i ragazzi dal menu.';
+  $('#messaggio').replaceChildren(
+    attivi.length ? '' : 'Classe vuota: aggiungi i ragazzi dal menu.',
+  );
   $('#messaggio').classList.toggle('nascosto', attivi.length > 0);
   $('#podi').replaceChildren(...CATEGORIE.map(disegnaPodio));
   $('#ragazzi').replaceChildren(...attivi.map(disegnaRagazzo));
@@ -208,12 +210,8 @@ async function conta(id, categoriaId, delta, { silenzioso = false } = {}) {
   disegna();
 
   if (delta > 0 && !silenzioso) {
-    if (dopo.indice > prima.indice && dopo.indice >= 2) {
-      boia({ icona: categoriaId, sottotitolo: `${s.nome} ora è ${dopo.nome}!` });
-    } else if (categoriaId === 'salame') {
-      boia({ icona: 'salame', sottotitolo: `${s.nome}: Salame!` });
-    }
-    toast(`+1 ${cat.nome} a ${s.nome}`, {
+    const salito = dopo.indice > prima.indice && dopo.indice >= 2;
+    toast(salito ? `${s.nome} ora è ${dopo.nome}!` : `+1 ${cat.nome} a ${s.nome}`, {
       azione: 'Annulla',
       durata: 5000,
       onAzione: () => conta(id, categoriaId, -1, { silenzioso: true }),
@@ -319,20 +317,11 @@ $('#btn-azzera').addEventListener('click', async () => {
 });
 
 /* ------------------------------------------------------------------ */
-/* Audio, schermo intero, avvio                                         */
+/* Boia dei matti, schermo intero, avvio                               */
 /* ------------------------------------------------------------------ */
 
-const btnAudio = $('#btn-audio');
-function disegnaAudio() {
-  const on = storage.audio();
-  btnAudio.replaceChildren(icona(on ? 'audio' : 'muto'));
-  btnAudio.setAttribute('aria-pressed', String(on));
-  btnAudio.setAttribute('aria-label', on ? 'Disattiva audio' : 'Attiva audio');
-}
-btnAudio.addEventListener('click', () => {
-  storage.salvaAudio(!storage.audio());
-  disegnaAudio();
-});
+$('#btn-boia').addEventListener('click', boia);
+attivaScorciatoia();
 
 $('#btn-schermo').addEventListener('click', () => {
   if (document.fullscreenElement) document.exitFullscreen();
@@ -341,14 +330,13 @@ $('#btn-schermo').addEventListener('click', () => {
 document.addEventListener('fullscreenchange', () =>
   document.body.classList.toggle('lim', !!document.fullscreenElement),
 );
-document.addEventListener('pointerdown', sbloccaAudio, { once: true });
 
 async function aggiorna() {
   try {
     stato = await api.getClasse(classeId);
     disegna();
   } catch (e) {
-    if (!stato) $('#messaggio').textContent = 'Non riesco ad aprire la classe: ' + e.message;
+    if (!stato) $('#messaggio').replaceChildren('Non riesco ad aprire la classe: ' + e.message);
   }
 }
 
@@ -358,5 +346,5 @@ setInterval(() => {
 }, 20000);
 window.addEventListener('storage', (e) => e.key === 'pollaio.demo.db' && aggiorna());
 
-disegnaAudio();
+$('#messaggio').replaceChildren(caricamento('Apro il pollaio...'));
 aggiorna();
