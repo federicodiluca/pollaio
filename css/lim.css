@@ -1,0 +1,448 @@
+/* Vista LIM: grande, leggibile da lontano, tutta in uno schermo */
+
+body.lim {
+  --u: min(1vw, 1.8vh);
+  font-size: calc(var(--u) * 1.9);
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 10% 0%, #ffe9c7 0, transparent 40%),
+    radial-gradient(circle at 100% 100%, #e3f3ea 0, transparent 40%), var(--sfondo);
+}
+
+.lim-testa {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 1);
+  padding: calc(var(--u) * 1) calc(var(--u) * 2);
+}
+
+.lim-logo {
+  font-weight: 900;
+  font-size: calc(var(--u) * 2.4);
+  color: inherit;
+  text-decoration: none;
+}
+
+.lim-classe {
+  margin: 0;
+  font-size: calc(var(--u) * 3.6);
+  font-weight: 900;
+  padding: 0 0.4em;
+  border-radius: 0.3em;
+  background: var(--inchiostro);
+  color: #fff;
+}
+
+.lim-select {
+  width: auto;
+  padding: 0.3rem 0.6rem;
+  min-height: 36px;
+  font-size: 0.9rem;
+}
+
+.lim-testa .btn {
+  font-size: 0.9rem;
+}
+
+.lim-banner {
+  margin: 0 calc(var(--u) * 2) calc(var(--u) * 1);
+  padding: 0.5em 1em;
+  border-radius: var(--raggio);
+  background: #fff1c2;
+  font-weight: 800;
+  text-align: center;
+}
+
+.lim-messaggio {
+  text-align: center;
+  font-size: calc(var(--u) * 3);
+}
+
+/* ---------- Griglia dei pannelli ---------- */
+
+.lim-griglia {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  gap: calc(var(--u) * 1.5);
+  padding: 0 calc(var(--u) * 2) calc(var(--u) * 2);
+  grid-template-columns: 1.35fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    'tac pat naso'
+    'tac perle perle';
+}
+
+.p-tacchini {
+  grid-area: tac;
+}
+
+.p-patatini {
+  grid-area: pat;
+}
+
+.p-naso {
+  grid-area: naso;
+}
+
+.p-perle {
+  grid-area: perle;
+}
+
+.pannello {
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--carta);
+  border: 2px solid var(--bordo);
+  border-radius: calc(var(--u) * 2);
+  box-shadow: var(--ombra);
+  padding: calc(var(--u) * 1.5) calc(var(--u) * 2);
+}
+
+.pannello h2 {
+  font-size: calc(var(--u) * 2.8);
+  font-weight: 900;
+  margin-bottom: calc(var(--u) * 1);
+}
+
+.p-tacchini {
+  border-color: #efc6ba;
+}
+
+.p-patatini {
+  border-color: #a9d8bf;
+}
+
+.p-naso {
+  border-color: #f3a5ad;
+}
+
+/* ---------- Classifiche ---------- */
+
+.classifica {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 0.6);
+  overflow: hidden;
+}
+
+.riga {
+  display: grid;
+  grid-template-columns: calc(var(--u) * 4.5) 1fr auto;
+  align-items: center;
+  gap: calc(var(--u) * 1);
+  padding: calc(var(--u) * 0.5) calc(var(--u) * 1);
+  border-radius: calc(var(--u) * 1.2);
+  background: #fffaf2;
+}
+
+.p-tacchini .riga.primo {
+  background: var(--tacchino-chiaro);
+}
+
+.p-patatini .riga.primo {
+  background: var(--patatino-chiaro);
+}
+
+.pos {
+  font-weight: 900;
+  font-size: calc(var(--u) * 2.6);
+  text-align: center;
+}
+
+.chi {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.nome {
+  font-weight: 800;
+  font-size: calc(var(--u) * 2.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.15;
+}
+
+.primo .nome {
+  font-size: calc(var(--u) * 3.1);
+}
+
+.dettaglio {
+  font-size: calc(var(--u) * 1.6);
+  line-height: 1.2;
+}
+
+.barra-punti {
+  display: block;
+  height: calc(var(--u) * 0.6);
+  margin-top: calc(var(--u) * 0.3);
+  border-radius: 999px;
+  background: var(--bordo);
+  overflow: hidden;
+}
+
+.barra-punti span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--tacchino);
+  transition: width 0.6s ease;
+}
+
+.p-patatini .barra-punti span {
+  background: var(--patatino);
+}
+
+.punti {
+  font-weight: 900;
+  font-size: calc(var(--u) * 3.4);
+  font-variant-numeric: tabular-nums;
+  color: var(--tacchino);
+}
+
+.p-patatini .punti {
+  color: var(--patatino);
+}
+
+.vuoto {
+  font-size: calc(var(--u) * 2.2);
+  color: var(--tenue);
+  padding: calc(var(--u) * 1) 0;
+}
+
+/* ---------- Naso rosso ---------- */
+
+.naso {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: calc(var(--u) * 0.6);
+}
+
+.naso-emoji {
+  font-size: calc(var(--u) * 7);
+  line-height: 1;
+  animation: dondola 3s ease-in-out infinite;
+}
+
+.naso-emoji.spento {
+  filter: grayscale(1);
+  opacity: 0.4;
+  animation: none;
+}
+
+.naso-nome {
+  font-size: calc(var(--u) * 3.4);
+  font-weight: 900;
+  color: var(--naso);
+  line-height: 1.1;
+}
+
+.naso-giorni {
+  font-size: calc(var(--u) * 2.2);
+  font-weight: 700;
+  color: var(--tenue);
+}
+
+@keyframes dondola {
+  50% {
+    transform: rotate(-8deg) scale(1.05);
+  }
+}
+
+.scuoti {
+  animation: scuoti 0.7s;
+}
+
+@keyframes scuoti {
+  20%,
+  60% {
+    transform: translateX(-12px) rotate(-1deg);
+  }
+  40%,
+  80% {
+    transform: translateX(12px) rotate(1deg);
+  }
+}
+
+/* ---------- Ultime perle ---------- */
+
+.totali {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--u) * 0.6);
+  margin-bottom: calc(var(--u) * 1);
+}
+
+.chip {
+  font-weight: 800;
+  font-size: calc(var(--u) * 1.8);
+  padding: 0.2em 0.7em;
+  border-radius: 999px;
+  background: var(--tacchino-chiaro);
+}
+
+.chip-pos {
+  background: var(--patatino-chiaro);
+}
+
+.perle {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(var(--u) * 0.5) calc(var(--u) * 2);
+  overflow: hidden;
+}
+
+.perle li {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.8);
+  min-width: 0;
+  font-size: calc(var(--u) * 2);
+  padding: calc(var(--u) * 0.3) calc(var(--u) * 0.6);
+  border-radius: calc(var(--u) * 1);
+}
+
+.perla-emoji {
+  font-size: calc(var(--u) * 3);
+}
+
+.perla-testo {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.perla-quando {
+  color: var(--tenue);
+  font-size: calc(var(--u) * 1.5);
+  white-space: nowrap;
+}
+
+/* ---------- Novità ---------- */
+
+.lampo {
+  animation: lampo 2.4s ease-out;
+}
+
+@keyframes lampo {
+  0%,
+  30% {
+    background: #ffe066;
+    box-shadow: 0 0 0 4px #ffe066;
+  }
+}
+
+/* ---------- Albo d'oro ---------- */
+
+.albo {
+  border: none;
+  border-radius: 24px;
+  padding: 1.5rem 2rem;
+  width: min(90vw, 760px);
+  max-height: 85vh;
+  background: var(--sfondo);
+  color: inherit;
+  font-size: 1.3rem;
+}
+
+.albo::backdrop {
+  background: rgb(43 33 24 / 55%);
+}
+
+.albo-testa {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.albo-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.albo-lista li {
+  padding: 1rem 0;
+  border-bottom: 2px dashed var(--bordo);
+}
+
+.albo-lista p {
+  margin: 0.2rem 0;
+}
+
+/* ---------- Schermi stretti: tutto in colonna ---------- */
+
+@media (max-width: 900px), (max-aspect-ratio: 1/1) {
+  body.lim {
+    --u: 1.6vw;
+    height: auto;
+    overflow: auto;
+    font-size: 1rem;
+  }
+
+  .lim-testa {
+    flex-wrap: wrap;
+  }
+
+  .lim-griglia {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-template-areas: 'naso' 'tac' 'pat' 'perle';
+  }
+
+  .pannello h2 {
+    font-size: 1.4rem;
+  }
+
+  .nome,
+  .primo .nome {
+    font-size: 1.15rem;
+  }
+
+  .pos,
+  .punti {
+    font-size: 1.4rem;
+  }
+
+  .dettaglio,
+  .perle li,
+  .chip,
+  .naso-giorni {
+    font-size: 0.95rem;
+  }
+
+  .naso-emoji {
+    font-size: 4rem;
+  }
+
+  .naso-nome {
+    font-size: 1.8rem;
+  }
+
+  .perle {
+    grid-template-columns: 1fr;
+  }
+
+  .riga {
+    grid-template-columns: 2.5rem 1fr auto;
+  }
+}

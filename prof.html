@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Vista Prof: Il Pollaio</title>
+    <meta name="theme-color" content="#fff8ec" />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%94%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/prof.css" />
+    <script type="module" src="js/prof.js"></script>
+  </head>
+  <body>
+    <header class="intestazione barra">
+      <a class="btn piccolo" href="./" aria-label="Torna alle classi">←</a>
+      <h1 class="titolo-classe">
+        <span id="nome-classe">...</span>
+        <span id="stagione" class="tenue"></span>
+      </h1>
+      <span class="spazio"></span>
+      <span id="badge-sync" class="etichetta nascosto" role="status"></span>
+      <button id="btn-audio" class="btn piccolo" type="button" aria-pressed="true">🔊</button>
+      <a id="link-lim" class="btn piccolo" href="lim.html">📺</a>
+    </header>
+
+    <main class="pagina">
+      <p id="naso" class="naso-striscia nascosto"></p>
+      <p id="messaggio" class="tenue" role="status">Carico il pollaio...</p>
+
+      <section aria-labelledby="titolo-studenti">
+        <h2 id="titolo-studenti" class="sr-only">Studenti</h2>
+        <ul id="griglia" class="griglia"></ul>
+      </section>
+
+      <section class="carta blocco" aria-labelledby="titolo-ultimi">
+        <h2 id="titolo-ultimi">Ultimi eventi</h2>
+        <ol id="ultimi" class="ultimi"></ol>
+      </section>
+
+      <details class="carta blocco" id="gestione">
+        <summary>⚙️ Gestione classe</summary>
+
+        <form id="form-studente">
+          <label for="nuovo-nome">Aggiungi studente</label>
+          <div class="in-linea">
+            <input
+              id="nuovo-nome"
+              type="text"
+              maxlength="40"
+              required
+              placeholder="Nome breve o soprannome"
+              autocomplete="off"
+            />
+            <button class="btn" type="submit">Aggiungi</button>
+          </div>
+          <p class="tenue piccolo">Per la privacy usa nomi brevi, tipo "Marco B.".</p>
+        </form>
+
+        <h3>Studenti</h3>
+        <ul id="lista-studenti" class="lista-studenti"></ul>
+
+        <h3>Stagione</h3>
+        <p class="tenue piccolo">
+          Chiudere la stagione proclama il Salame d'oro e il Patatino d'oro e azzera le classifiche.
+          Lo storico resta consultabile dalla LIM.
+        </p>
+        <div class="riga-btn">
+          <button id="btn-stagione" class="btn pericolo" type="button">
+            🏆 Chiudi la stagione
+          </button>
+          <button id="btn-backup" class="btn" type="button">💾 Esporta backup JSON</button>
+        </div>
+      </details>
+    </main>
+
+    <dialog id="scelta" class="scelta" aria-labelledby="scelta-titolo">
+      <form method="dialog" class="scelta-corpo">
+        <div class="scelta-testa">
+          <h2 id="scelta-titolo">...</h2>
+          <button class="btn piccolo" type="submit" value="chiudi" aria-label="Chiudi">✕</button>
+        </div>
+        <div id="scelta-tipi" class="scelta-tipi"></div>
+        <label for="scelta-nota">Nota (facoltativa)</label>
+        <input
+          id="scelta-nota"
+          type="text"
+          maxlength="200"
+          autocomplete="off"
+          placeholder="es. ha confuso = con =="
+        />
+      </form>
+    </dialog>
+  </body>
+</html>
