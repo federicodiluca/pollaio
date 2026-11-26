@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Il Pollaio</title>
+    <meta name="theme-color" content="#fff8ec" />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/classe.css" />
+    <script type="module" src="js/classe.js"></script>
+  </head>
+  <body>
+    <header class="testa">
+      <a class="btn tondo" href="./" aria-label="Torna alle classi">
+        <svg class="icona" aria-hidden="true"><use href="assets/icone.svg#indietro"></use></svg>
+      </a>
+      <h1 id="nome-classe" class="nome-classe">...</h1>
+      <span class="spazio"></span>
+      <button id="btn-audio" class="btn tondo" type="button" aria-pressed="true" aria-label="Audio">
+        <svg class="icona" aria-hidden="true"><use href="assets/icone.svg#audio"></use></svg>
+      </button>
+      <button id="btn-schermo" class="btn tondo" type="button" aria-label="Schermo intero">
+        <svg class="icona" aria-hidden="true"><use href="assets/icone.svg#schermo"></use></svg>
+      </button>
+      <button id="btn-menu" class="btn tondo" type="button" aria-label="Gestione classe">
+        <svg class="icona" aria-hidden="true"><use href="assets/icone.svg#menu"></use></svg>
+      </button>
+    </header>
+
+    <main class="corpo">
+      <p id="messaggio" class="messaggio" role="status">Apro il pollaio...</p>
+
+      <section aria-label="Podi" class="podi" id="podi"></section>
+
+      <section aria-labelledby="t-ragazzi">
+        <h2 id="t-ragazzi" class="sezione">La classe</h2>
+        <ul id="ragazzi" class="ragazzi"></ul>
+      </section>
+    </main>
+
+    <!-- Ragazzo selezionato: +1 / -1 e titolo -->
+    <dialog id="dlg-ragazzo" class="foglio" aria-labelledby="dlg-nome">
+      <form method="dialog" class="foglio-corpo">
+        <div class="foglio-testa">
+          <div>
+            <h2 id="dlg-nome">...</h2>
+            <p id="dlg-titolo" class="titolo-pill"></p>
+          </div>
+          <button class="btn tondo" type="submit" value="chiudi" aria-label="Chiudi">
+            <svg class="icona" aria-hidden="true"><use href="assets/icone.svg#chiudi"></use></svg>
+          </button>
+        </div>
+        <div id="dlg-contatori" class="contatori"></div>
+        <details class="dettagli">
+          <summary>Titolo e nome</summary>
+          <label for="in-titolo">Titolo personalizzato</label>
+          <input
+            id="in-titolo"
+            type="text"
+            maxlength="60"
+            autocomplete="off"
+            placeholder="es. Re del copia-incolla"
+          />
+          <label for="in-nome">Nome</label>
+          <input id="in-nome" type="text" maxlength="40" autocomplete="off" />
+          <div class="riga-btn">
+            <button id="btn-salva" class="btn primario" type="button">Salva</button>
+            <button id="btn-disattiva" class="btn" type="button">Togli dalla classe</button>
+          </div>
+        </details>
+      </form>
+    </dialog>
+
+    <!-- Gestione della classe -->
+    <dialog id="dlg-menu" class="foglio" aria-labelledby="t-menu">
+      <form method="dialog" class="foglio-corpo">
+        <div class="foglio-testa">
+          <h2 id="t-menu">Gestione</h2>
+          <button class="btn tondo" type="submit" value="chiudi" aria-label="Chiudi">
+            <svg class="icona" aria-hidden="true"><use href="assets/icone.svg#chiudi"></use></svg>
+          </button>
+        </div>
+        <label for="in-nuovo">Aggiungi un ragazzo</label>
+        <div class="in-linea">
+          <input
+            id="in-nuovo"
+            type="text"
+            maxlength="40"
+            autocomplete="off"
+            placeholder="Nome breve, es. Marco B."
+          />
+          <button id="btn-aggiungi" class="btn" type="button">Aggiungi</button>
+        </div>
+        <div id="tolti" class="tolti"></div>
+        <div class="riga-btn">
+          <button id="btn-backup" class="btn" type="button">
+            <svg class="icona" aria-hidden="true"><use href="assets/icone.svg#scarica"></use></svg>
+            Backup JSON
+          </button>
+          <button id="btn-azzera" class="btn pericolo" type="button">Azzera tutto</button>
+        </div>
+        <p class="nota">"Azzera tutto" scarica prima un backup, poi rimette a zero i contatori.</p>
+      </form>
+    </dialog>
+  </body>
+</html>

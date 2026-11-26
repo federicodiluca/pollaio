@@ -3,10 +3,22 @@
   padding: 1.5rem 0 1rem;
 }
 
-.emoji-eroe {
-  font-size: clamp(2.2rem, 9vw, 3.5rem);
+.icone-eroe {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
   margin: 0;
-  letter-spacing: 0.15em;
+}
+
+.icone-eroe svg {
+  width: clamp(3rem, 14vw, 5rem);
+  height: clamp(3rem, 14vw, 5rem);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .due-colonne {
@@ -41,4 +53,18 @@
 .gestione summary {
   cursor: pointer;
   font-weight: 700;
+}
+
+a.classe {
+  display: grid;
+  place-items: center;
+  min-height: 120px;
+  color: inherit;
+  text-decoration: none;
+  border-top: 6px solid var(--inchiostro);
+  transition: transform 0.1s;
+}
+
+a.classe:hover {
+  transform: translateY(-3px);
 }

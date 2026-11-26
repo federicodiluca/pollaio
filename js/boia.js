@@ -4,7 +4,7 @@
  * Il suono viene da assets/boia-dei-matti.mp3 se c'è (sostituiscilo con la tua voce!),
  * altrimenti parte un "wah wah wah" sintetizzato con Web Audio.
  */
-import { el, riduciMovimento } from './ui.js';
+import { el, icona, riduciMovimento } from './ui.js';
 import { storage } from './storage.js';
 
 const FILE_AUDIO = new URL('../assets/boia-dei-matti.mp3', import.meta.url).href;
@@ -89,24 +89,21 @@ export async function suono() {
 }
 
 /**
- * Mostra l'animazione a tutto schermo.
- * @param {{emoji?: string, sottotitolo?: string}} opzioni
+ * Mostra l'animazione a tutto schermo, con una pioggia dell'icona indicata.
+ * @param {{icona?: string, titolo?: string, sottotitolo?: string}} opzioni
  */
-export function boia({ emoji = '🥓', sottotitolo = '' } = {}) {
+export function boia({ icona: id = 'salame', titolo = 'Boia dei matti!', sottotitolo = '' } = {}) {
   suono();
   const pioggia = riduciMovimento()
     ? []
-    : Array.from({ length: 24 }, () =>
-        el(
-          'span',
-          {
-            class: 'boia-goccia',
-            'aria-hidden': 'true',
-            style: `left:${Math.random() * 100}%;animation-delay:${Math.random() * 0.8}s;font-size:${2 + Math.random() * 3}rem`,
-          },
-          emoji,
-        ),
-      );
+    : Array.from({ length: 22 }, () => {
+        const g = el('span', {
+          class: 'boia-goccia',
+          style: `left:${Math.random() * 95}%;animation-delay:${Math.random() * 0.8}s;width:${3 + Math.random() * 4}rem`,
+        });
+        g.append(icona(id, { classe: 'icona-piena' }));
+        return g;
+      });
   const ov = el(
     'div',
     { class: 'boia', role: 'alert' },
@@ -114,7 +111,7 @@ export function boia({ emoji = '🥓', sottotitolo = '' } = {}) {
     el(
       'div',
       { class: 'boia-testo' },
-      el('strong', {}, 'Boia dei matti!'),
+      el('strong', {}, titolo),
       sottotitolo && el('span', {}, sottotitolo),
     ),
   );

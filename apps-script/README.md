@@ -21,7 +21,7 @@ Il Pollaio salva tutto in un Google Sheet **tuo e privato**. Un piccolo script p
 2. La prima volta Google chiede le autorizzazioni: **Rivedi autorizzazioni**, scegli il tuo
    account, poi **Avanzate > Vai a ... (non sicuro)** e **Consenti**. È il tuo script, sul tuo
    foglio: l'avviso compare perché non è verificato da Google.
-3. Nel foglio compaiono i tab `Classi`, `Studenti`, `Eventi`, `Config`.
+3. Nel foglio compaiono i tab `Classi` e `Studenti`.
 
 `setup` si può rieseguire senza danni: crea solo ciò che manca.
 
@@ -45,12 +45,14 @@ scrittura. Dopo 20 tentativi sbagliati in 15 minuti il server rifiuta tutto per 
 "Chiunque" significa che chiunque abbia l'URL può _chiamare_ lo script, ma senza PIN riceve
 solo "PIN errato".
 
-## 6. Aggiungi classi e studenti
+## 6. Aggiungi classi e ragazzi
 
-Puoi farlo dall'app (vista Prof > Gestione), oppure a mano nel foglio:
+Dall'app: pagina iniziale > "Aggiungi una classe", poi nella classe menu > "Aggiungi un ragazzo".
+Oppure a mano nel foglio:
 
-- `Classi`: una riga per classe, per esempio `1M | 1M`.
-- `Studenti`: `id` univoco (anche solo `1m-01`), `classeId`, `nomeVisualizzato`, `attivo` = `TRUE`.
+- `Classi`: una riga per classe, per esempio `3J | 3J`.
+- `Studenti`: `id` univoco (anche solo `3j-01`), `classeId`, `nome`, `titolo` (facoltativo),
+  `attivo` = `TRUE`, e i contatori `pollo`, `tacchino`, `salame`, `pagliaccio` a `0`.
 
 Consiglio per la privacy: usa nomi brevi o soprannomi (es. "Marco B."), non nomi e cognomi completi.
 
@@ -63,23 +65,6 @@ Apri il sito, incolla l'URL `/exec` e il PIN. Restano salvati solo nel browser (
 Se incolli una nuova versione di `Code.gs`: **Esegui il deployment > Gestisci deployment >**
 matita **> Versione: Nuova versione > Esegui il deployment**. L'URL resta lo stesso.
 
-## Config
-
-| chiave                | default | significato                                     |
-| --------------------- | ------- | ----------------------------------------------- |
-| `punti.POLLO`         | 1       | ci sei cascato                                  |
-| `punti.TACCHINO`      | 2       | ci sei cascato di brutto                        |
-| `punti.SALAME`        | 3       | ci sei cascato con tutte le scarpe              |
-| `punti.PAGLIACCIO`    | 2       | passaggio del naso rosso                        |
-| `punti.SPIEGO_PEGGIO` | 1       | mi hai fatto dire "mi spiego peggio"            |
-| `punti.PORCO_ME`      | 2       | mi hai fatto dire "porco me"                    |
-| `punti.PATATINO`      | 1       | bravo! (classifica separata)                    |
-| `boia.soglia`         | 3       | da quanti punti scatta "Boia dei matti!"        |
-| `stagione.<classe>`   | 1       | stagione corrente della classe (gestita da app) |
-| `albo.<classe>`       | `[]`    | albo d'oro (gestito dall'app, non toccare)      |
-
-I punti valgono per gli eventi **nuovi**: ogni evento salva i punti del momento.
-
 ## API
 
 Tutte le risposte: `{ "ok": true, "data": ... }` oppure `{ "ok": false, "errore": "..." }`.
@@ -87,17 +72,13 @@ Tutte le risposte: `{ "ok": true, "data": ... }` oppure `{ "ok": false, "errore"
 **Letture** (`GET`): `?action=...&pin=...`
 
 - `listClassi`
-- `getState&classeId=1M`: classe, studenti, eventi (tutte le stagioni), config, stagione, albo
+- `getClasse&classeId=3J`: la classe e i suoi ragazzi con i contatori
 - `exportAll`: tutto il foglio
 
 **Scritture** (`POST`, corpo JSON, `Content-Type: text/plain` per evitare il preflight CORS):
 
-- `{ action: "addEvent", pin, evento: { id, classeId, studenteId, tipo, nota?, timestamp? } }`
-- `{ action: "undoEvent", pin, id }`: aggiunge un evento `ANNULLA` (il foglio Eventi è in sola aggiunta)
+- `{ action: "conta", pin, studenteId, categoria: "pollo" | "tacchino" | "salame" | "pagliaccio", delta: 1 | -1 }`
 - `{ action: "addClass", pin, classe: { id, nome } }`
-- `{ action: "addStudent", pin, studente: { id?, classeId, nomeVisualizzato } }`
-- `{ action: "editStudent", pin, studente: { id, nomeVisualizzato?, attivo? } }`
-- `{ action: "newSeason", pin, classeId }`: proclama Salame d'oro e Patatino d'oro
-
-Gli `id` degli eventi li genera il client: se la coda offline rimanda lo stesso evento, il
-server lo riconosce e non lo duplica.
+- `{ action: "addStudent", pin, studente: { classeId, nome, titolo? } }`
+- `{ action: "editStudent", pin, studente: { id, nome?, titolo?, attivo? } }`
+- `{ action: "azzera", pin, classeId }`: rimette a zero i contatori della classe

@@ -19,16 +19,32 @@ export function el(tag, attrs = {}, ...figli) {
   return n;
 }
 
+const SVG = 'http://www.w3.org/2000/svg';
+const SPRITE = new URL('../assets/icone.svg', import.meta.url).pathname;
+
+/** Icona dallo sprite SVG. Senza `etichetta` è decorativa (nascosta agli screen reader). */
+export function icona(id, { classe = 'icona', etichetta } = {}) {
+  const svg = document.createElementNS(SVG, 'svg');
+  svg.setAttribute('class', classe);
+  if (etichetta) {
+    svg.setAttribute('role', 'img');
+    svg.setAttribute('aria-label', etichetta);
+  } else {
+    svg.setAttribute('aria-hidden', 'true');
+  }
+  const use = document.createElementNS(SVG, 'use');
+  use.setAttribute('href', `${SPRITE}#${id}`);
+  svg.append(use);
+  return svg;
+}
+
 /* ------------------------------------------------------------------ */
 /* Toast                                                                */
 /* ------------------------------------------------------------------ */
 
 let contenitore;
 
-/**
- * Mostra un messaggio in basso. Con `azione` compare un pulsante (es. "Annulla").
- * @returns {() => void} funzione per chiudere il toast
- */
+/** Messaggio in basso; con `azione` compare un pulsante (es. "Annulla"). */
 export function toast(messaggio, { azione, onAzione, durata = 4000, tipo = '' } = {}) {
   if (!contenitore) {
     contenitore = el('div', { class: 'toasts', role: 'status', 'aria-live': 'polite' });
@@ -43,43 +59,36 @@ export function toast(messaggio, { azione, onAzione, durata = 4000, tipo = '' } 
     setTimeout(() => t.remove(), 250);
   };
   if (azione) {
-    const b = el('button', { type: 'button', class: 'toast-azione' }, azione);
-    b.addEventListener('click', () => {
-      chiudi();
-      onAzione && onAzione();
-    });
-    const barra = el('span', { class: 'toast-barra', style: `animation-duration:${durata}ms` });
-    t.append(b, barra);
+    t.append(
+      el(
+        'button',
+        {
+          type: 'button',
+          class: 'toast-azione',
+          onclick: () => {
+            chiudi();
+            onAzione && onAzione();
+          },
+        },
+        azione,
+      ),
+      el('span', { class: 'toast-barra', style: `animation-duration:${durata}ms` }),
+    );
   }
   contenitore.append(t);
   setTimeout(chiudi, durata);
-  return chiudi;
 }
 
 /* ------------------------------------------------------------------ */
 /* Varie                                                                */
 /* ------------------------------------------------------------------ */
 
-const RTF = new Intl.RelativeTimeFormat('it', { numeric: 'auto' });
-
-export function quandoFa(iso, ora = Date.now()) {
-  const sec = Math.round((Date.parse(iso) - ora) / 1000);
-  const abs = Math.abs(sec);
-  if (abs < 60) return 'adesso';
-  if (abs < 3600) return RTF.format(Math.round(sec / 60), 'minute');
-  if (abs < 86400) return RTF.format(Math.round(sec / 3600), 'hour');
-  return RTF.format(Math.round(sec / 86400), 'day');
-}
-
-export function giorniTesto(n) {
-  if (n === 0) return 'da oggi';
-  if (n === 1) return 'da 1 giorno';
-  return `da ${n} giorni`;
-}
-
-export function scaricaJson(dati, nomeFile) {
+export function scaricaJson(dati, prefisso = 'pollaio-backup') {
+  const d = new Date();
+  const p = (x) => String(x).padStart(2, '0');
+  const nome = `${prefisso}-${d.getFullYear()}${p(d.getMonth() + 1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}.json`;
   const blob = new Blob([JSON.stringify(dati, null, 2)], { type: 'application/json' });
-  const a = el('a', { href: URL.createObjectURL(blob), download: nomeFile });
+  const a = el('a', { href: URL.createObjectURL(blob), download: nome });
   document.body.append(a);
   a.click();
   setTimeout(() => {
@@ -88,14 +97,6 @@ export function scaricaJson(dati, nomeFile) {
   }, 1000);
 }
 
-export function nomeBackup() {
-  const d = new Date();
-  const p = (x) => String(x).padStart(2, '0');
-  return `pollaio-backup-${d.getFullYear()}${p(d.getMonth() + 1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}.json`;
-}
-
-export function parametro(nome) {
-  return new URLSearchParams(location.search).get(nome);
-}
+export const parametro = (nome) => new URLSearchParams(location.search).get(nome);
 
 export const riduciMovimento = () => matchMedia('(prefers-reduced-motion: reduce)').matches;

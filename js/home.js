@@ -1,9 +1,6 @@
 import { storage } from './storage.js';
 import { creaApi, ErroreServer } from './api.js';
-import { $, el, toast, scaricaJson, nomeBackup } from './ui.js';
-import { registraSw } from './sw-registra.js';
-
-registraSw();
+import { $, el, toast, scaricaJson } from './ui.js';
 
 function mostra(id) {
   for (const v of ['vista-setup', 'vista-classi'])
@@ -69,21 +66,11 @@ async function caricaClassi(api) {
       ...classi.map((c) =>
         el(
           'li',
-          { class: 'carta classe' },
-          el('h2', {}, c.nome || c.id),
+          {},
           el(
-            'div',
-            { class: 'riga-btn' },
-            el(
-              'a',
-              { class: 'btn primario', href: `prof.html?classe=${encodeURIComponent(c.id)}` },
-              '📱 Prof',
-            ),
-            el(
-              'a',
-              { class: 'btn', href: `lim.html?classe=${encodeURIComponent(c.id)}` },
-              '📺 LIM',
-            ),
+            'a',
+            { class: 'carta classe', href: `classe.html?classe=${encodeURIComponent(c.id)}` },
+            el('h2', {}, c.nome || c.id),
           ),
         ),
       ),
@@ -103,7 +90,7 @@ $('#form-classe').addEventListener('submit', async (e) => {
   try {
     await creaApi().scrivi('addClass', { classe: { id, nome: $('#classe-nome').value.trim() } });
     e.target.reset();
-    toast(`Classe ${id} aggiunta. Che il pollaio abbia inizio! 🐔`);
+    toast(`Classe ${id} aggiunta. Che il pollaio abbia inizio!`);
     caricaClassi(creaApi());
   } catch (ex) {
     toast(ex.message, { tipo: 'errore' });
@@ -112,7 +99,7 @@ $('#form-classe').addEventListener('submit', async (e) => {
 
 $('#btn-backup').addEventListener('click', async () => {
   try {
-    scaricaJson(await creaApi().exportAll(), nomeBackup());
+    scaricaJson(await creaApi().exportAll());
   } catch (ex) {
     toast('Backup non riuscito: ' + ex.message, { tipo: 'errore' });
   }
@@ -126,11 +113,7 @@ $('#btn-ripristina-demo').addEventListener('click', () => {
 });
 
 $('#btn-esci').addEventListener('click', () => {
-  const coda = storage.coda().length;
-  const msg = coda
-    ? `Ci sono ${coda} operazioni non ancora inviate: andranno perse. Continuare?`
-    : 'Scollegare questo dispositivo? URL e PIN verranno dimenticati.';
-  if (!confirm(msg)) return;
+  if (!confirm('Scollegare questo dispositivo? URL e PIN verranno dimenticati.')) return;
   storage.esci();
   avvia();
 });

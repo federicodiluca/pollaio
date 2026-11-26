@@ -377,3 +377,32 @@ textarea:focus {
     animation-duration: 2.8s !important;
   }
 }
+
+/* ---------- Icone SVG ---------- */
+
+.icona {
+  width: 1.3rem;
+  height: 1.3rem;
+  flex: none;
+  fill: currentColor;
+}
+
+.icona-piena {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+}
+
+.btn.tondo {
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  box-shadow: 0 2px 0 var(--inchiostro);
+}
+
+.btn.tondo:disabled {
+  opacity: 0.3;
+}

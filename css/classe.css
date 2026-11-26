@@ -1,0 +1,508 @@
+/* Pagina della classe: podi in alto, ragazzi sotto. */
+
+:root {
+  --c-pollo: #e9a800;
+  --c-tacchino: #a0522d;
+  --c-salame: #c2185b;
+  --c-pagliaccio: #e63946;
+}
+
+.c-pollo {
+  --c: var(--c-pollo);
+}
+
+.c-tacchino {
+  --c: var(--c-tacchino);
+}
+
+.c-salame {
+  --c: var(--c-salame);
+}
+
+.c-pagliaccio {
+  --c: var(--c-pagliaccio);
+}
+
+/* ---------- Testata ---------- */
+
+.testa {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: max(0.6rem, env(safe-area-inset-top)) 1rem 0.6rem;
+  background: rgb(255 248 236 / 92%);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--bordo);
+}
+
+.nome-classe {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 900;
+  padding: 0 0.45em;
+  border-radius: 0.35em;
+  background: var(--inchiostro);
+  color: #fff;
+}
+
+.corpo {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.messaggio {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--tenue);
+}
+
+.sezione {
+  font-size: 1.3rem;
+  margin: 1.5rem 0 0.75rem;
+}
+
+.nota {
+  font-size: 0.85rem;
+  color: var(--tenue);
+  margin: 0.3rem 0;
+}
+
+.icona-cat {
+  width: 2rem;
+  height: 2rem;
+  flex: none;
+}
+
+.icona-cat.piccola {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.icona-cat.grande {
+  width: 3rem;
+  height: 3rem;
+}
+
+/* ---------- Podi ---------- */
+
+.podi {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.podio {
+  background: var(--carta);
+  border: 2px solid var(--bordo);
+  border-top: 6px solid var(--c);
+  border-radius: var(--raggio);
+  box-shadow: var(--ombra);
+  padding: 0.9rem 1rem 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 230px;
+}
+
+.podio h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.3rem;
+  margin: 0 0 0.5rem;
+}
+
+.gradini {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr 1fr;
+  align-items: end;
+  gap: 0.4rem;
+}
+
+.gradino {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.chi {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.sul-podio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: spunta 0.4s ease-out both;
+}
+
+.corona {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.podio-nome {
+  font-weight: 800;
+  line-height: 1.15;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.g1 .podio-nome {
+  font-size: 1.15rem;
+}
+
+.podio-volte {
+  font-weight: 900;
+  font-size: 0.85rem;
+  color: #fff;
+  background: var(--c);
+  border-radius: 999px;
+  padding: 0 0.55em;
+  margin-top: 0.15rem;
+}
+
+.blocco {
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: rgb(43 33 24 / 55%);
+  border-radius: 10px 10px 0 0;
+  border: 2px solid rgb(43 33 24 / 15%);
+  border-bottom: none;
+}
+
+.g1 .blocco {
+  height: 90px;
+  background: linear-gradient(#ffe27a, #f2b705);
+}
+
+.g2 .blocco {
+  height: 64px;
+  background: linear-gradient(#f1f1f1, #c9ccd1);
+}
+
+.g3 .blocco {
+  height: 44px;
+  background: linear-gradient(#f3c9a1, #cd8a4f);
+}
+
+.vuoto {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: var(--tenue);
+  margin: 0 0 1rem;
+}
+
+@keyframes spunta {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+  }
+}
+
+/* ---------- Barre ---------- */
+
+.barra {
+  display: block;
+  height: 8px;
+  border-radius: 999px;
+  background: #f0e4d3;
+  overflow: hidden;
+}
+
+.barra-piena {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--c);
+  transition: width 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ---------- Ragazzi ---------- */
+
+.ragazzi {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+.ragazzo {
+  font: inherit;
+  color: inherit;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.85rem 1rem;
+  background: var(--carta);
+  border: 2px solid var(--bordo);
+  border-radius: var(--raggio);
+  box-shadow: 0 3px 0 var(--bordo);
+  cursor: pointer;
+  transition: transform 0.08s;
+}
+
+.ragazzo:active {
+  transform: translateY(3px);
+  box-shadow: none;
+}
+
+.ragazzo-nome {
+  font-weight: 900;
+  font-size: 1.2rem;
+  line-height: 1.15;
+}
+
+.titolo-pill {
+  align-self: flex-start;
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 800;
+  font-style: italic;
+  padding: 0.1em 0.7em;
+  border-radius: 999px;
+  background: #fff1c2;
+  color: #7a5a00;
+}
+
+.ragazzo-livelli {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.2rem;
+}
+
+.livello {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto auto;
+  column-gap: 0.5rem;
+  align-items: center;
+}
+
+.livello .icona-cat {
+  grid-row: span 2;
+}
+
+.livello-nome {
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.livello-n {
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+.livello .barra {
+  grid-column: 2 / 4;
+}
+
+.livello.zero {
+  opacity: 0.35;
+}
+
+/* ---------- Dialoghi a foglio ---------- */
+
+.foglio {
+  border: none;
+  border-radius: 24px 24px 0 0;
+  padding: 0;
+  margin: auto 0 0;
+  width: 100%;
+  max-width: 100%;
+  max-height: 92dvh;
+  background: var(--sfondo);
+  color: inherit;
+  box-shadow: 0 -10px 40px rgb(0 0 0 / 25%);
+}
+
+.foglio[open] {
+  animation: sale 0.18s ease-out;
+}
+
+.foglio::backdrop {
+  background: rgb(43 33 24 / 45%);
+}
+
+@media (min-width: 640px) {
+  .foglio {
+    margin: auto;
+    max-width: 560px;
+    border-radius: 24px;
+  }
+}
+
+@keyframes sale {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+}
+
+.foglio-corpo {
+  padding: 1rem 1rem max(1rem, env(safe-area-inset-bottom));
+}
+
+.foglio-testa {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.foglio-testa h2 {
+  margin: 0 0 0.3rem;
+  font-size: 1.6rem;
+}
+
+.contatori {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.contatore {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  background: var(--carta);
+  border: 2px solid var(--bordo);
+  border-left: 6px solid var(--c);
+  border-radius: var(--raggio);
+}
+
+.piu {
+  font: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  width: 116px;
+  padding: 0.4rem 0.3rem;
+  border: 2px solid var(--c);
+  border-radius: 14px;
+  background: #fff;
+  color: inherit;
+  cursor: pointer;
+  box-shadow: 0 3px 0 var(--c);
+}
+
+.piu:active {
+  transform: translateY(3px);
+  box-shadow: none;
+}
+
+.piu-testo {
+  font-weight: 900;
+  font-size: 0.85rem;
+}
+
+.contatore-info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.btn.meno {
+  box-shadow: none;
+  border-width: 2px;
+}
+
+.dettagli {
+  margin-top: 1rem;
+}
+
+.dettagli summary {
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.in-linea {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tolti {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+}
+
+.tolti .nota {
+  width: 100%;
+}
+
+/* ---------- Modalità LIM (schermo intero) ---------- */
+
+body.lim .corpo {
+  max-width: none;
+}
+
+body.lim .podio h3 {
+  font-size: 1.8rem;
+}
+
+body.lim .icona-cat {
+  width: 2.6rem;
+  height: 2.6rem;
+}
+
+body.lim .podio {
+  min-height: 300px;
+}
+
+body.lim .podio-nome {
+  font-size: 1.4rem;
+}
+
+body.lim .g1 .podio-nome {
+  font-size: 1.7rem;
+}
+
+body.lim .g1 .blocco {
+  height: 120px;
+}
+
+body.lim .g2 .blocco {
+  height: 84px;
+}
+
+body.lim .g3 .blocco {
+  height: 58px;
+}
+
+body.lim .ragazzo-nome {
+  font-size: 1.5rem;
+}
+
+body.lim .livello-nome {
+  font-size: 1rem;
+}

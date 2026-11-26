@@ -9,10 +9,7 @@
       content="Il Pollaio: la classifica scherzosa della classe. Polli, tacchini, salami, pagliacci e patatini."
     />
     <meta name="theme-color" content="#fff8ec" />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%94%3C/text%3E%3C/svg%3E"
-    />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/home.css" />
@@ -20,7 +17,9 @@
   </head>
   <body>
     <header class="intestazione pagina">
-      <a class="logo" href="./">🐔 Il Pollaio</a>
+      <a class="logo" href="./"
+        ><img src="assets/favicon.svg" alt="" width="32" height="32" /> Il Pollaio</a
+      >
       <span class="spazio"></span>
       <span id="badge-modo" class="etichetta nascosto"></span>
     </header>
@@ -28,10 +27,15 @@
     <main class="pagina">
       <section id="vista-setup" class="nascosto" aria-labelledby="titolo-setup">
         <div class="eroe">
-          <p class="emoji-eroe" aria-hidden="true">🐔 🦃 🥓 🤡 🥔</p>
+          <p class="icone-eroe" aria-hidden="true">
+            <svg><use href="assets/icone.svg#pollo"></use></svg>
+            <svg><use href="assets/icone.svg#tacchino"></use></svg>
+            <svg><use href="assets/icone.svg#salame"></use></svg>
+            <svg><use href="assets/icone.svg#pagliaccio"></use></svg>
+          </p>
           <h1 id="titolo-setup">Benvenuto nel Pollaio</h1>
           <p class="tenue">
-            Chi ci casca è un pollo, chi esagera prende il naso rosso, chi è bravo è un patatino.
+            Chi ci casca è un pollo, un tacchino o un salame. Chi esagera si prende il naso rosso.
           </p>
         </div>
 
@@ -66,10 +70,10 @@
             <h2>Solo un'occhiata?</h2>
             <p>
               Prova la <strong>modalità demo</strong>: dati inventati salvati nel browser, nessun
-              backend. Puoi assegnare tacchini a volontà.
+              backend. Puoi distribuire tacchini a volontà.
             </p>
             <div class="riga-btn">
-              <button id="btn-demo" class="btn" type="button">🥔 Prova la demo</button>
+              <button id="btn-demo" class="btn" type="button">Prova la demo</button>
             </div>
           </div>
         </div>
@@ -107,9 +111,9 @@
         </details>
 
         <div class="riga-btn">
-          <button id="btn-backup" class="btn" type="button">💾 Esporta backup JSON</button>
+          <button id="btn-backup" class="btn" type="button">Esporta backup JSON</button>
           <button id="btn-ripristina-demo" class="btn nascosto" type="button">
-            ♻️ Ripristina dati demo
+            Ripristina dati demo
           </button>
           <button id="btn-esci" class="btn pericolo" type="button">Cambia collegamento</button>
         </div>
@@ -118,7 +122,7 @@
 
     <footer class="pagina tenue piccolo">
       <p>
-        Fatto con 🥔 da un prof che si spiega peggio.
+        Fatto da un prof che si spiega peggio.
         <a href="https://github.com/federicodiluca/pollaio">Codice sorgente</a>
       </p>
     </footer>
